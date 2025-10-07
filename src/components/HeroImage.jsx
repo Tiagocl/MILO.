@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { motion, useMotionValue, useTransform, animate } from "motion/react"
+import { motion, useMotionValue, useTransform, animate, AnimatePresence } from "motion/react"
 import orange from "../assets/orange.avif"
 import blue from "../assets/blue.avif"
 import green from "../assets/green.avif"
@@ -85,28 +85,57 @@ const HeroImage = () => {
       {/* Text + dots */}
       <div className="absolute w-[30%] height-[20%] top-1/2 right-[30px] flex items-center justify-end gap-5">
         <div className="flex flex-col text-white">
-          {clicked === orange ? (
-            <>
-              <span className="text-[48px] font-[600] tracking-[-0.06em]">A comfy icon</span>
-              <span className="text-[18px] font-[600] tracking-[-0.06em] flex self-end relative -translate-y-[7px]">
-                Discover Bulge
-              </span>
-            </>
-          ) : clicked === blue ? (
-            <>
-              <span className="text-[48px] font-[600] tracking-tighter">A classy seat</span>
-              <span className="text-[18px] font-[600] tracking-[-0.06em] flex self-end relative -translate-y-[7px]">
-                Discover Rogue
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="text-[48px] font-[600] tracking-tighter">An elegant crib</span>
-              <span className="text-[18px] font-[600] tracking-[-0.06em] flex self-end relative -translate-y-[7px]">
-                Discover Andy
-              </span>
-            </>
-          )}
+          <AnimatePresence mode="wait">
+            {clicked === orange ? (
+              <motion.div key="orange" className="flex flex-col">
+                <motion.span
+                  className="text-[48px] font-[600] tracking-[-0.06em]"
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0, transition: { duration: 0.3 } }}
+                  animate={{ opacity: 1, transition: { duration: 1, delay: 0.2 }}}
+                >A comfy icon</motion.span>
+                <motion.span 
+                  className="text-[18px] font-[600] tracking-[-0.06em] flex self-end relative -translate-y-[7px]"
+                  initial={{ opacity: 0}}
+                  exit={{ opacity: 0, transition: { duration: 0.3 }}}
+                  animate={{ opacity: 1, transition: { duration: 1, delay: 0.5 }}}>
+                    Discover Bulge
+                </motion.span>
+              </motion.div>
+            ) : clicked === blue ? (
+              <motion.div key="blue" className="flex flex-col">
+                <motion.span 
+                  className="text-[48px] font-[600] tracking-tighter"
+                  initial={{ opacity: 0}}
+                  exit={{ opacity: 0, transition: { duration: 0.3 }}}
+                  animate={{ opacity: 1, transition: { duration: 1, delay: 0.2 }}}
+                >A classy seat</motion.span>
+                <motion.span 
+                  className="text-[18px] font-[600] tracking-[-0.06em] flex self-end relative -translate-y-[7px]"
+                  initial={{ opacity: 0}}
+                  exit={{ opacity: 0, transition: { duration: 0.3 }}}
+                  animate={{ opacity: 1, transition: { duration: 1, delay: 0.5 }}}>
+                    Discover Rogue
+                </motion.span>
+              </motion.div>
+            ) : (
+              <motion.div key="green" className="flex flex-col">
+                <motion.span 
+                  className="text-[48px] font-[600] tracking-tighter"
+                  initial={{ opacity: 0}}
+                  exit={{ opacity: 0, transition: { duration: 0.3 }}}
+                  animate={{ opacity: 1, transition: { duration: 1, delay: 0.2 }}}
+                >An elegant crib</motion.span>
+                <motion.span 
+                  className="text-[18px] font-[600] tracking-[-0.06em] flex self-end relative -translate-y-[7px]"
+                  initial={{ opacity: 0}}
+                  exit={{ opacity: 0, transition: { duration: 0.3 }}}
+                  animate={{ opacity: 1, transition: { duration: 1, delay: 0.5 }}}>
+                    Discover Andy
+                </motion.span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         <div className="flex flex-col gap-[10px] relative translate-y-[4px]">
           <button
